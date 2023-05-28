@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESourcing.Products", "ESourcing.Products\ESourcing.Products.csproj", "{EF17EED3-3386-4CE4-88BE-F151FCABCCAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Products", "Products", "{DE324496-6382-45D7-988E-62067FE9F762}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{295E75AA-F0F6-4AF1-AD5D-F700AF5F4ED3}"
+	ProjectSection(SolutionItems) = preProject
+		Notes.txt = Notes.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{96CCF5B0-1F21-40BA-87B5-174BD33136AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{337E96F3-41B8-46B5-B776-E40E64D6B123}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{C06ABD94-F463-4D91-BC52-2772EE39FA74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C5BC5DD6-FE60-479A-BC4A-6564E6F658DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{22BDB3C3-2B07-49F4-A490-9442223B95DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sourcing", "Sourcing", "{EE1B2EFD-FDC1-49D2-80D8-F06BC9FC5C32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF17EED3-3386-4CE4-88BE-F151FCABCCAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF17EED3-3386-4CE4-88BE-F151FCABCCAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF17EED3-3386-4CE4-88BE-F151FCABCCAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF17EED3-3386-4CE4-88BE-F151FCABCCAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF17EED3-3386-4CE4-88BE-F151FCABCCAA} = {DE324496-6382-45D7-988E-62067FE9F762}
+		{DE324496-6382-45D7-988E-62067FE9F762} = {337E96F3-41B8-46B5-B776-E40E64D6B123}
+		{96CCF5B0-1F21-40BA-87B5-174BD33136AA} = {295E75AA-F0F6-4AF1-AD5D-F700AF5F4ED3}
+		{337E96F3-41B8-46B5-B776-E40E64D6B123} = {295E75AA-F0F6-4AF1-AD5D-F700AF5F4ED3}
+		{C06ABD94-F463-4D91-BC52-2772EE39FA74} = {295E75AA-F0F6-4AF1-AD5D-F700AF5F4ED3}
+		{C5BC5DD6-FE60-479A-BC4A-6564E6F658DA} = {337E96F3-41B8-46B5-B776-E40E64D6B123}
+		{22BDB3C3-2B07-49F4-A490-9442223B95DA} = {337E96F3-41B8-46B5-B776-E40E64D6B123}
+		{EE1B2EFD-FDC1-49D2-80D8-F06BC9FC5C32} = {337E96F3-41B8-46B5-B776-E40E64D6B123}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E4FF848-DD78-4245-A787-E7BE3CF39346}
+	EndGlobalSection
+EndGlobal

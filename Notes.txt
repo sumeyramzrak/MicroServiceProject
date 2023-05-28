@@ -1,0 +1,13 @@
+* Öncelikle powershell üzerinden bir solution oluþturduk 
+	- Proje oluþturulacak path e git
+		cd <Path>
+	- Proje klasörü oluþtur.
+		mkdir E-SourcingMicroService
+	- Solution ekle
+		dotnet new sln
+	- Webapi projesi ekle
+		dotnet new webapi -o ESourcing.Products
+	- WebApi ye sln ekle
+		dotnet sln add ESourcing.Products
+ 
+* Microservis oluþturduk bu oluþturduðumuz microservis birden fazla olacak. Bu servisler apigateway ile sonuçlarýný webapp e getirecek. Web appde de uý katmanýnda sonuçlar gösterilecek. 
