@@ -11,3 +11,11 @@
 		dotnet sln add ESourcing.Products
  
 * Microservis oluþturduk bu oluþturduðumuz microservis birden fazla olacak. Bu servisler apigateway ile sonuçlarýný webapp e getirecek. Web appde de uý katmanýnda sonuçlar gösterilecek. 
+
+* Docker üzerinden mongodb pull edildi.
+	-docker pull mongo
+	-docker run -d -p 27017:27017 --name sourcingdb mongo
+
+* Appsetting.json dosyasýnda database baðlantý bilgileri eklendi.
+* Db baðlantý bilgilerini kullanabilmemiz için setting klasörü altýnda IProductDatabaseSettings,ProductDatabaseSettings oluþturuldu.
+* MongoDb bilgilerini eriþebilmek için Program.cs dosyasýnda configuration eklendi.
