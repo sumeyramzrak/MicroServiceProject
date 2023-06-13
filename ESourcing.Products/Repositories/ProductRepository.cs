@@ -36,7 +36,7 @@ namespace ESourcing.Products.Repositories
             return await _context.Products.Find(p => true).ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetPtoductByCategory(string category)
+        public async Task<IEnumerable<Product>> GetProductByCategory(string category)
         {
             var filter = Builders<Product>.Filter.Eq(m => m.Category, category);
             return await _context.Products.Find(filter).ToListAsync();
