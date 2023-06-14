@@ -29,7 +29,7 @@ namespace ESourcing.Products.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id:length(24)", Name = "GetProduct")] //Parametre olarak 24 karakterli bir id gelecek ve metodun adı GetProduct olarak görünecek.
+        [HttpGet("{id:length(24)}", Name = "GetProduct")] //Parametre olarak 24 karakterli bir id gelecek ve metodun adı GetProduct olarak görünecek.
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct(string id)
@@ -59,7 +59,7 @@ namespace ESourcing.Products.Controllers
             return Ok(await _productRepository.Update(product));
         }
 
-        [HttpDelete("{id:length(24)")] //Parametre olarak 24 karakterli bir id gelecek ve metodun adı GetProduct olarak görünecek.
+        [HttpDelete("{id:length(24)}")] //Parametre olarak 24 karakterli bir id gelecek ve metodun adı GetProduct olarak görünecek.
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> DeleteProductById(string id)
         {
