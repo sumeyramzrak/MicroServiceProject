@@ -14,6 +14,6 @@ namespace ESourcing.Products.Data
             Products = database.GetCollection<Product>(settings.CollectionName);
             ProductContextSeed.SeedData(Products);
         }
-        public IMongoCollection<Product> Products { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IMongoCollection<Product> Products { get; }
     }
 }

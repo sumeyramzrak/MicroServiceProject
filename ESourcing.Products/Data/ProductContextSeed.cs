@@ -8,13 +8,13 @@ namespace ESourcing.Products.Data
         public static void SeedData(IMongoCollection<Product> productCollection)
         {
             bool existProduct = productCollection.Find(p => true).Any();
-            if (existProduct)
+            if (!existProduct)
             {
-                productCollection.InsertManyAsync(GetConfiguureProduct());
+                productCollection.InsertManyAsync(GetConfigureProducts());
             }
         }
 
-        private static IEnumerable<Product> GetConfiguureProduct()
+        private static IEnumerable<Product> GetConfigureProducts()
         {
             return new List<Product>()
             {
