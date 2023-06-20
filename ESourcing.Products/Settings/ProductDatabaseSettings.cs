@@ -2,7 +2,7 @@
 {
     public class ProductDatabaseSettings : IProductDatabaseSettings
     {
-        public string ConnectionSettings { get; set; }
+        public string ConnectionSetting { get; set; }
         public string DatabaseName { get; set; }
         public string CollectionName { get; set; }
     }

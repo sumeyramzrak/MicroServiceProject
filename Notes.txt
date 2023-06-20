@@ -19,3 +19,9 @@
 * Appsetting.json dosyasýnda database baðlantý bilgileri eklendi.
 * Db baðlantý bilgilerini kullanabilmemiz için setting klasörü altýnda IProductDatabaseSettings,ProductDatabaseSettings oluþturuldu.
 * MongoDb bilgilerini eriþebilmek için Program.cs dosyasýnda configuration eklendi.
+
+------------------DOCKERIZE-------------------------
+
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d 
+docker-compose up --build -d :  her þeyi build edip projeyi öyle oluþturur.
+docker-compose down : containerlarý siler.
