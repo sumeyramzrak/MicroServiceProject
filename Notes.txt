@@ -39,6 +39,13 @@ docker-compose down : containerlarý siler.
   # Image üzerinden bir container oluþturduðumuzda container üzerinde yapýlan deðiþiklikler container yaþarken devam edecektir fakat kill olduðunda deðiþiklikler yok olacaktýr. 
   # Volume sayesinde bir önceki kill olan containera kadar olan deðiþiklikler, datalar saklanýr.
 
+*CONTAINERLARI AYAÐA KALDIRMA
+  docker run --name some-mongo -p  27017:27017 -d mongo
+  docker run --hostname my-rabbit --name some-rabbit -p 15672:15672 rabbitmq:3-management
+  rabbitmq-plugins enable rabbitmq_management
+  docker start some-rabbit
+
 ------------------RABBIT MQ-------------------------
  docker run -d --hostname my-rabbit --name some-rabbit -p 8080:15672 rabbitmq:3-management
+ docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 -p 5672-5672 rabbitmq:3-management //localhosta baðlanabilmesi için sonrasýnda silip bu þekilde oluþturduk.
 container ayaða kalktýktan sonra http://localhost:15672/ adresi üzerinden kullanýcý adý:guest / password: guest olarak giriþ yapýp servisleri tooldan inceleyebiliriz.
