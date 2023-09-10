@@ -1,0 +1,7 @@
+﻿Projede CQRS pattern kullanacağız. 
+	* CQRS mantığında command ve queries yapılarının ıkamsı ve bu ayrılmış sorumlulukları bir handler üzerinden kontrol edilmesi esasına dayanıyor.
+	* Bu sebeple command ve queryleri tutacak ayrı iki klasörümüz olacak ve 
+	* Bu command ve queryleri işleyecek handlerlarımız olacak. Handler klasörü altında açacağımız classlar ile bunu sağlayacağız.
+	* Mapper profilini eklemek için Mapper klasörünü kullancağız.
+	* Responses altında command ve querylerden gelen responseların geri döndüreceği nesnelerin sınıfları olacak.
+	* PipelineBehaviours altında Mediator üzerinden execute ettiğimiz metotları yakalayan handlerlardan önce hangi akış içinde kontrol edilmesini istiyorsak kullanacağımız metotlar olacak.(validation,performance,exceptionhandling gibi)
