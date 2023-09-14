@@ -5,3 +5,15 @@
 	* Mapper profilini eklemek için Mapper klasörünü kullancağız.
 	* Responses altında command ve querylerden gelen responseların geri döndüreceği nesnelerin sınıfları olacak.
 	* PipelineBehaviours altında Mediator üzerinden execute ettiğimiz metotları yakalayan handlerlardan önce hangi akış içinde kontrol edilmesini istiyorsak kullanacağımız metotlar olacak.(validation,performance,exceptionhandling gibi)
+
+
+-----CROSS CUTTING CONCERNS-----
+1) Request
+2) Validation Pipe Input
+3) Performance Pipe Input
+4) Exception Pipe Input
+*5) CQRS Handler
+6) Exception Pipe Output
+7) Performance Pipe Output
+8) Validation Pipe Output
+*9)Response
