@@ -49,3 +49,10 @@ docker-compose down : containerlarý siler.
  docker run -d --hostname my-rabbit --name some-rabbit -p 8080:15672 rabbitmq:3-management
  docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 -p 5672-5672 rabbitmq:3-management //localhosta baðlanabilmesi için sonrasýnda silip bu þekilde oluþturduk.
 container ayaða kalktýktan sonra http://localhost:15672/ adresi üzerinden kullanýcý adý:guest / password: guest olarak giriþ yapýp servisleri tooldan inceleyebiliriz.
+
+-----------------MIGRATION---------------------------
+* package manager console aç
+* default proje olarak dbcontextin bulunduðu orderin.ýnfrastructure ý ayarla.
+* add-migration Initial komutunu çalýþtýr.
+	- Infrastructure altýnda Migrations klasörü oluþturacak.
+	- Klasör altýna bazý classlar ekledi.

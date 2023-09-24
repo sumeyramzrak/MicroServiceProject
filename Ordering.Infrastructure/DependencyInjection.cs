@@ -19,14 +19,14 @@ namespace Ordering.Infrastructure
              * InMemoryDatabase = Uygulama ayağa kalkarken inmemoryde bir db olacak şekilde kendini konfigure ediyor. 
              */
             #endregion
-            services.AddDbContext<OrderContext>(opt => opt.UseInMemoryDatabase(databaseName: "InMemoryDb"),
-                                                ServiceLifetime.Singleton,
-                                                ServiceLifetime.Singleton);
+            //services.AddDbContext<OrderContext>(opt => opt.UseInMemoryDatabase(databaseName: "InMemoryDb"),
+            //                                    ServiceLifetime.Singleton,
+            //                                    ServiceLifetime.Singleton);
 
-            //services.AddDbContext<OrderContext>(options =>
-            //        options.UseSqlServer(
-            //            configuration.GetConnectionString("OrderConnection"),
-            //            b => b.MigrationsAssembly(typeof(OrderContext).Assembly.FullName)), ServiceLifetime.Singleton);
+            services.AddDbContext<OrderContext>(options =>
+                    options.UseSqlServer(
+                        configuration.GetConnectionString("OrderConnection"),
+                        b => b.MigrationsAssembly(typeof(OrderContext).Assembly.FullName)), ServiceLifetime.Singleton);
 
             //Add Repositories
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
