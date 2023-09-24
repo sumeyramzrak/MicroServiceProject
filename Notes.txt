@@ -20,7 +20,7 @@
 * Db baðlantý bilgilerini kullanabilmemiz için setting klasörü altýnda IProductDatabaseSettings,ProductDatabaseSettings oluþturuldu.
 * MongoDb bilgilerini eriþebilmek için Program.cs dosyasýnda configuration eklendi.
 
-------------------DOCKERIZE-------------------------
+---------------------------DOCKERIZE---------------------------
 !!docker composeun bulunduðu pathde çalýþtýrýlacak cmdde !!
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d 
 docker-compose up --build -d :  her þeyi build edip projeyi öyle oluþturur.
@@ -45,14 +45,28 @@ docker-compose down : containerlarý siler.
   rabbitmq-plugins enable rabbitmq_management
   docker start some-rabbit
 
-------------------RABBIT MQ-------------------------
+---------------------------RABBIT MQ---------------------------
  docker run -d --hostname my-rabbit --name some-rabbit -p 8080:15672 rabbitmq:3-management
  docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 -p 5672-5672 rabbitmq:3-management //localhosta baðlanabilmesi için sonrasýnda silip bu þekilde oluþturduk.
 container ayaða kalktýktan sonra http://localhost:15672/ adresi üzerinden kullanýcý adý:guest / password: guest olarak giriþ yapýp servisleri tooldan inceleyebiliriz.
 
------------------MIGRATION---------------------------
+---------------------------MIGRATION---------------------------
 * package manager console aç
 * default proje olarak dbcontextin bulunduðu orderin.ýnfrastructure ý ayarla.
 * add-migration Initial komutunu çalýþtýr.
 	- Infrastructure altýnda Migrations klasörü oluþturacak.
 	- Klasör altýna bazý classlar ekledi.
+
+
+---------------------------API GATEWAY---------------------------
+* Clientlarýn servislere ayrý ayrý rootlardan ulaþmasýný istemiyoruz ortak bir giriþ kapýsýna ihtiyacýmýz var bu sebeple api gateway design pattern kullanýyoruz.
+* Ocelot Apinin Saðladýðý avantajlar
+  - Routing: Clientdan gelen istekleri arka tarafta apiler üzerinde daðýtarak arka tarafta servisler arasý bir köprü oluþturabilmesi
+  - Authentication&Authorization: Api gateway e gelen isteklerini auth olduktan sonra servislere ulaþabilmesini saðlarýz. Bu patterni kullanmazsak her servis için ayrý ayrý auth yapýsý kurmamýz gerekir.
+  - Rate Limiting(DDOS): Arka arkaya n tane art niyetli istek olduðunda bu durumu handle etmemizi saðlar, uygulamanýn down olmasýný engeller.
+  					   Ýlgili servise þu kadar zaman diliminde bu kadar istek gelsin gibi konfigurasyonlar yapabiliyoruz.
+  - Caching: Gelen istekleri arka tarafta cevap almadan önce cacheinde bulunuyorsa cevabý kendi üzerinden saðlar.
+  - Load Balancing: Uygulamanýn scaleoutunu yönetebilmemizi saðlar.
+  - Circuit Breaker:Uygulamanýn response veremediði durumda arka arkaya devamlý istek alma durumu mantýklý deðil. 
+					Response gelene kadar gelen istekleri tekrar clienta döndürerek servisin kendine gelebilmesi için zaman saðlar.
+  - Request Aggregation: Arka tarafta n tane servise istek yaparak bir data toplamak istiyoruz.
