@@ -61,7 +61,6 @@ builder.Services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
     singleton lifecycle ý ile dependency injection ile istediðimiz konfigurasyonlarla oluþturmasýný saðlýyoruz.
     */
 });
-
 builder.Services.AddSingleton<EventBusRabbitMQProducer>();
 #endregion
 #region ProjectDependencies
@@ -76,6 +75,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseAuthorization();
 
