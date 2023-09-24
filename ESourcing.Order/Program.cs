@@ -58,6 +58,10 @@ builder.Services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
 });
 builder.Services.AddSingleton<EventBusOrderCreateConsumer>();
 #endregion
+#region AddAutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
+//Program.cs üzerinde olduðu assemblyi tanýmasý için ekledik.
+#endregion
 var app = builder.Build();
 app.UseRabbitListener();
 app.MigrateDatabase();
