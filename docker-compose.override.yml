@@ -22,7 +22,7 @@ services:
       ports:
         - "1433:1433"
       environment:
-        SA_PASSWORD: "Odb12345678"
+        SA_PASSWORD: "1q2w3e4R!"
         ACCEPT_EULA: "Y"
 
    esourcing.products:   

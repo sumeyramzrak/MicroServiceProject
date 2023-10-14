@@ -56,6 +56,7 @@ container ayaða kalktýktan sonra http://localhost:15672/ adresi üzerinden kullan
 * add-migration Initial komutunu çalýþtýr.
 	- Infrastructure altýnda Migrations klasörü oluþturacak.
 	- Klasör altýna bazý classlar ekledi.
+*update-database komutu çalýþtýrýlarak migration dosyasýndaki deðþiklikler database eyansýtýlýr.
 
 
 ---------------------------API GATEWAY---------------------------
@@ -70,3 +71,9 @@ container ayaða kalktýktan sonra http://localhost:15672/ adresi üzerinden kullan
   - Circuit Breaker:Uygulamanýn response veremediði durumda arka arkaya devamlý istek alma durumu mantýklý deðil. 
 					Response gelene kadar gelen istekleri tekrar clienta döndürerek servisin kendine gelebilmesi için zaman saðlar.
   - Request Aggregation: Arka tarafta n tane servise istek yaparak bir data toplamak istiyoruz.
+
+  ---------------------------SQL SERVERI DOCKER ÜZERÝNDEN KURMA---------------------------
+
+  docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Odb12345678" -p 1433:1433 --name WebAppDb -d mcr.microsoft.com/mssql/server:2022-latest
+
+  ***migration yapýldý
