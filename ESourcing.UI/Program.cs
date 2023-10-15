@@ -1,6 +1,7 @@
 using ESourcing.Core.Entities;
 using ESourcing.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,28 +11,40 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddMvc();
-var app = builder.Build();
-
-void ConfigureServices(IServiceCollection services)
-{
-    services.AddAuthentication(
+builder.Services.AddAuthentication(
         CertificateAuthenticationDefaults.AuthenticationScheme)
         .AddCertificate();
-    IConfigurationRoot configuration = new ConfigurationBuilder()
+IConfigurationRoot configuration = new ConfigurationBuilder()
    .SetBasePath(Directory.GetCurrentDirectory())
    .AddJsonFile("appsettings.json")
    .Build();
-    services.AddDbContext<WebAppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
-    services.AddIdentity<AppUser, IdentityRole>(opt =>
-    {
-        opt.Password.RequiredLength = 4;
-        opt.Password.RequireNonAlphanumeric = false;
-        opt.Password.RequireLowercase = false;
-        opt.Password.RequireUppercase = false;
-        opt.Password.RequireDigit = false;
-    }).AddDefaultTokenProviders().AddEntityFrameworkStores<WebAppDbContext>();
-    // All other service configuration
-}
+builder.Services.AddDbContext<WebAppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
+builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
+{
+    opt.Password.RequiredLength = 4;
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Password.RequireLowercase = false;
+    opt.Password.RequireUppercase = false;
+    opt.Password.RequireDigit = false;
+}).AddDefaultTokenProviders().AddEntityFrameworkStores<WebAppDbContext>();
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//                    .AddCookie(options =>
+//                    {
+//                        options.Cookie.Name = "My Cookie";
+//                        options.LoginPath = "Home/Login";
+//                        options.LogoutPath = "Home/Logout";
+//                        options.ExpireTimeSpan = TimeSpan.FromDays(3);
+//                        options.SlidingExpiration = false;
+//                    });
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Home/Login";
+    options.LogoutPath = $"/Home/Logout";
+});
+var app = builder.Build();
+
+//builder.Services ==public void ConfigureServices(IServiceCollection services){services.--------}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
