@@ -1,4 +1,7 @@
-﻿﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject SignInManager<AppUser> UserManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,7 +172,15 @@
 						<img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">Alexander Pierce</a>
+						@if (SignInManager.IsSignedIn(User))
+						{
+							<a href="#" class="d-block">Welcome to "@UserManager.UserManager.GetUserName(User)"</a>
+						}
+						else
+						{
+							<a class="d-block">User Not Logged</a>
+						}
+
 					</div>
 				</div>
 
@@ -187,8 +198,7 @@
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-						<!-- Add icons to the links using the .nav-icon class
-							 with font-awesome or any other icon font library -->
+						<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 						<li class="nav-item has-treeview menu-open">
 							<a href="#" class="nav-link active">
 								<i class="nav-icon fas fa-tachometer-alt"></i>
@@ -197,43 +207,79 @@
 									<i class="right fas fa-angle-left"></i>
 								</p>
 							</a>
-							<ul class="nav nav-treeview">
+							@*						<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="./index.html" class="nav-link active">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Dashboard v1</p>
-									</a>
+								<a href="./index.html" class="nav-link active">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Dashboard v1</p>
+								</a>
 								</li>
 								<li class="nav-item">
-									<a href="./index2.html" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Dashboard v2</p>
-									</a>
+								<a href="./index2.html" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Dashboard v2</p>
+								</a>
 								</li>
 								<li class="nav-item">
-									<a href="./index3.html" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
-										<p>Dashboard v3</p>
-									</a>
+								<a href="./index3.html" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Dashboard v3</p>
+								</a>
 								</li>
-							</ul>
+								</ul>*@
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-action="Signup">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Sign Up
-								</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" asp-action="Login">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-									Login
-								</p>
-							</a>
-						</li>
+						@if (SignInManager.IsSignedIn(User))
+						{
+							<li class="nav-item has-treeview">
+								<a href="#" class="nav-link active">
+									<i class="nav-icon fas fa-copy"></i>
+									<p>Auction Operations</p>
+									<i class="right fas fa-angle-left right"></i>
+
+								</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a asp-controller="Auction" asp-action="Index" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Auction List</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a asp-controller="Auction" asp-action="Create" class="nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Auction Create</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a asp-controller="Home" asp-action="Logout" class="nav-item nav-link">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Logout</p>
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li class="nav-item">
+								<a asp-controller="Auction" asp-action="Index" class="nav-item nav-link">
+									<i class="far fa-user nav-icon"></i>
+									<p>Auction List</p>
+								</a>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item">
+								<a asp-controller="Home" asp-action="SignUp" class="nav-item nav-link">
+									<i class="nav-icon far fa-user"></i>
+									<p>SignUp</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a asp-controller="Home" asp-action="Login" class="nav-item nav-link">
+									<i class="nav-icon far fa-user"></i>
+									<p>Login</p>
+								</a>
+							</li>
+						}
 						<li class="nav-item has-treeview">
 							<a href="#" class="nav-link">
 								<i class="nav-icon fas fa-copy"></i>
