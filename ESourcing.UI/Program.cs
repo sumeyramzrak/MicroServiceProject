@@ -1,5 +1,9 @@
 using ESourcing.Core.Entities;
+using ESourcing.Core.Repositories;
+using ESourcing.Core.Repositories.Base;
 using ESourcing.Infrastructure.Data;
+using ESourcing.Infrastructure.Repository;
+using ESourcing.Infrastructure.Repository.Base;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +40,10 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 //                        options.ExpireTimeSpan = TimeSpan.FromDays(3);
 //                        options.SlidingExpiration = false;
 //                    });
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/Home/Login";
@@ -60,6 +68,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=index}/{id?}");
