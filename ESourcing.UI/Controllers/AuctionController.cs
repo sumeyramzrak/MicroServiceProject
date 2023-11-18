@@ -9,10 +9,12 @@ namespace ESourcing.UI.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly ProductClient _productClient;
-        public AuctionController(IUserRepository userRepository, ProductClient productClient)
+        private readonly AuctionClient _auctionClient;
+        public AuctionController(IUserRepository userRepository, ProductClient productClient, AuctionClient auctionClient)
         {
             _userRepository = userRepository;
             _productClient = productClient;
+            _auctionClient = auctionClient;
         }
 
         public IActionResult Index()
@@ -37,6 +39,12 @@ namespace ESourcing.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AuctionViewModel model)
         {
+            model.Status = 0;
+            model.CreatedAt = DateTime.Now;
+            model.IncludedSellers.Add(model.SellerId);
+            var createAuction = await _auctionClient.CreateAuction(model);
+            if (createAuction.IsSuccess)
+                return RedirectToAction("Index");
             return View(model);
         }
 
