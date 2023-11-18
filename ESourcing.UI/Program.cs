@@ -4,6 +4,7 @@ using ESourcing.Core.Repositories.Base;
 using ESourcing.Infrastructure.Data;
 using ESourcing.Infrastructure.Repository;
 using ESourcing.Infrastructure.Repository.Base;
+using ESourcing.UI.Clients;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -43,6 +44,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<ProductClient>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -71,7 +74,7 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=index}/{id?}");
+    endpoints.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapRazorPages();
 });
 app.Run();

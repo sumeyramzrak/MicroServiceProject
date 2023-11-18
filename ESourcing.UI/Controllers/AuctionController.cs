@@ -1,4 +1,5 @@
 ﻿using ESourcing.Core.Repositories;
+using ESourcing.UI.Clients;
 using ESourcing.UI.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,11 @@ namespace ESourcing.UI.Controllers
     public class AuctionController : Controller
     {
         private readonly IUserRepository _userRepository;
-        public AuctionController(IUserRepository userRepository)
+        private readonly ProductClient _productClient;
+        public AuctionController(IUserRepository userRepository, ProductClient productClient)
         {
-            userRepository = _userRepository;
+            _userRepository = userRepository;
+            _productClient = productClient;
         }
 
         public IActionResult Index()
@@ -21,6 +24,10 @@ namespace ESourcing.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            var productList = await _productClient.GetProducts();
+            if (productList.IsSuccess)
+                ViewBag.ProductList = productList.Data;
+
             var userList = await _userRepository.GetAllAsync();
             ViewBag.UserList = userList;
 
