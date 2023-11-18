@@ -17,10 +17,12 @@ namespace ESourcing.UI.Controllers
             _auctionClient = auctionClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<AuctionViewModel> model = new List<AuctionViewModel>();
-            return View(model);
+           var auctionList=await _auctionClient.GetAuctions();
+            if (auctionList.IsSuccess)
+                return View(auctionList.Data);
+            return View();
         }
 
         [HttpGet]
