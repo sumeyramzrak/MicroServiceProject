@@ -14,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSession(opt =>
+{
+    opt.IdleTimeout = TimeSpan.FromMinutes(20);
+});
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddMvc();
 builder.Services.AddAuthentication(
@@ -57,7 +61,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 var app = builder.Build();
 
 //builder.Services ==public void ConfigureServices(IServiceCollection services){services.--------}
-
+app.UseSession();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

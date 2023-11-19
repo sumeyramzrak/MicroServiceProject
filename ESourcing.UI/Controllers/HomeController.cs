@@ -43,8 +43,9 @@ namespace ESourcing.UI.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index");
-                        //return LocalRedirect(returnUrl);
+                        HttpContext.Session.SetString("IsAdmin", user.IsAdmin.ToString());
+                        //return RedirectToAction("Index");
+                        return LocalRedirect(returnUrl);
                     }
                     else
                         ModelState.AddModelError("", "Email address is not valid or password");

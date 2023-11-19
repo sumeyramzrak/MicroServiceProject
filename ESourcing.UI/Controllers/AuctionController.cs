@@ -1,4 +1,5 @@
 ﻿using ESourcing.Core.Repositories;
+using ESourcing.Core.ResultModels;
 using ESourcing.UI.Clients;
 using ESourcing.UI.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -67,6 +68,21 @@ namespace ESourcing.UI.Controllers
             model.IsAdmin = Convert.ToBoolean(isAdmin);
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<Result<string>> SendBid(BidViewModel model)
+        {
+            model.CreateAt = DateTime.Now;
+            var sendBidResponse = await _bidClient.SendBid(model);
+            return sendBidResponse;
+        }
+
+        [HttpPost]
+        public async Task<Result<string>> CompleteBid(string id)
+        {
+            var completeBidResponse = await _auctionClient.CompleteBid(id);
+            return completeBidResponse;
         }
     }
 }

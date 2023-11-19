@@ -41,6 +41,16 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     event.preventDefault();
 });
 
+document.getElementById("finishButton").addEventListener("click", function (event) {
+
+    var sendCompleteBidRquest = {
+        AuctionId: auctionId,
+    }
+    SendCompleteBid(sendCompleteBidRquest);
+    event.preventDefault();
+});
+
+
 function addBidToTable(user, bid) {
     var str = "<tr>";
     str += "<td>" + user + "</td>";
@@ -67,6 +77,25 @@ function SendBid(model) {
                 connection.invoke("SendBidAsync", groupName, model.SellerUserName, model.Price).catch(function (err) {
                     return console.error(err.toString());
                 });
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function SendCompleteBid(model) {
+    var id = auctionId;
+    $.ajax({
+
+        url: "/Auction/CompleteBid",
+        type: "POST",
+        data: { id: id },
+        success: function (response) {
+            if (response) {
+                console.log("ıslemınız basarıyla sonuclandı");
+                location.href = "https://localhost:44398/Auction/Index";
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
