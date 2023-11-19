@@ -12,7 +12,7 @@ namespace ESourcing.UI.Clients
         public BidClient(HttpClient client)
         {
             _client = client;
-            _client.BaseAddress = new Uri(CommonInfo.LocalAuctionBaseAddress);
+            _client.BaseAddress = new Uri(CommonInfo.BaseAddress);
         }
 
         public async Task<Result<List<BidViewModel>>> GelAllBidsByAuctionId(string id)

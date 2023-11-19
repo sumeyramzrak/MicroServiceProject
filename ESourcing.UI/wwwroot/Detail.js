@@ -1,6 +1,6 @@
 ﻿import { signalR } from "../../../lib/microsoft-signalr/signalr";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5066/auctionhub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:8001/auctionhub").build(); //docker-compose esourcing port:8001
 var auctionId = document.getElementById("AuctionId").value;
 
 
