@@ -1,4 +1,5 @@
 using ESourcing.Sourcing.Data;
+using ESourcing.Sourcing.Hubs;
 using ESourcing.Sourcing.Repositories;
 using ESourcing.Sourcing.Repositories.Interfaces;
 using ESourcing.Sourcing.Settings;
@@ -16,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.Configure<SourcingDatabaseSettings>(builder.Configuration.GetSection(nameof(SourcingDatabaseSettings)));
 builder.Services.AddSingleton<ISourcingDatabaseSettings>(sp => sp.GetRequiredService<IOptions<SourcingDatabaseSettings>>().Value);
 builder.Services.AddAutoMapper(typeof(Program));
-
+builder.Services.AddSignalR();
 #region Project Dependencies
 builder.Services.AddTransient<IAuctionRepository, AuctionRepository>();
 builder.Services.AddTransient<IBidRepository, BidRepository>();
@@ -79,6 +80,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
+app.MapHub<AuctionHub>("/auctionhub");
 app.MapControllers();
+
 
 app.Run();
