@@ -48,6 +48,7 @@ namespace ESourcing.UI.Clients
             return new Result<AuctionViewModel>(false, ResultConstant.RecordCreateNotSuccessfully);
         }
 
+
         public async Task<Result<AuctionViewModel>> GetAuctionById(string id)
         {
             var response = await _client.GetAsync("api/v1/Auction/" + id);

@@ -47,6 +47,7 @@ builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<ProductClient>();
 builder.Services.AddHttpClient<AuctionClient>();
+builder.Services.AddHttpClient<BidClient>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

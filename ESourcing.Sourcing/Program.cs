@@ -18,6 +18,14 @@ builder.Services.Configure<SourcingDatabaseSettings>(builder.Configuration.GetSe
 builder.Services.AddSingleton<ISourcingDatabaseSettings>(sp => sp.GetRequiredService<IOptions<SourcingDatabaseSettings>>().Value);
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddSignalR();
+builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+   {
+       builder.AllowAnyOrigin()
+       .AllowAnyMethod()
+       .AllowAnyHeader()
+       .AllowCredentials()
+       .WithOrigins("http://localhost:5066");
+   }));
 #region Project Dependencies
 builder.Services.AddTransient<IAuctionRepository, AuctionRepository>();
 builder.Services.AddTransient<IBidRepository, BidRepository>();
@@ -79,7 +87,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseAuthorization();
-
+app.UseCors("CorsPolicy");
 app.MapHub<AuctionHub>("/auctionhub");
 app.MapControllers();
 
